@@ -17,7 +17,6 @@ const Create = () => {
         name: name,
         email: email,
         password: password,
-        header,
       })
       .then(() => {
         history("/read");
