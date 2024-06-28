@@ -68,7 +68,7 @@ const Create = () => {
           className="btn btn-primary"
           onClick={handleSubmit}
         >
-          Submit
+          Register
         </button>
       </form>
     </div>
