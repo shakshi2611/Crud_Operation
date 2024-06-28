@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Read = () => {
   const [data, setData] = useState([]);
+  const [tabledark,setTableDark] = useState('');
 
   function getData() {
     axios
@@ -22,12 +23,12 @@ const Read = () => {
       });
   }
 
-  const setToLocalStorage = (id,name,email,password) => {
-    localStorage.setItem('id', id);
-    localStorage.setItem('name', name);
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
-  }
+  const setToLocalStorage = (id, name, email, password) => {
+    localStorage.setItem("id", id);
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("password", password);
+  };
 
   useEffect(() => {
     getData();
@@ -35,8 +36,23 @@ const Read = () => {
 
   return (
     <>
-      <h2>Read Operation</h2>
-      <table class="table">
+      <div className="form-check form-switch">
+        <input
+          className="form-check-input"
+          type="checkbox"
+          onClick={() => {
+            if (tabledark === 'table-dark') setTableDark("");
+              else setTableDark("table-dark");
+          }}
+        />
+      </div>
+      <div className="d-flex justify-content-between m-2">
+        <h1>Read Operation</h1>
+        <Link to="/">
+          <button className="btn btn-secondary">Create</button>
+        </Link>
+      </div>
+      <table className={`table ${tabledark}`}>
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -57,8 +73,20 @@ const Read = () => {
                   <td>{eachData.email}</td>
                   <td>{eachData.password}</td>
                   <td>
-                    <Link to="/update" >
-                      <button className="btn-success" onClick={() => setToLocalStorage(eachData.id,eachData.name,eachData.email, eachData.password)}>Edit</button>
+                    <Link to="/update">
+                      <button
+                        className="btn-success"
+                        onClick={() =>
+                          setToLocalStorage(
+                            eachData.id,
+                            eachData.name,
+                            eachData.email,
+                            eachData.password
+                          )
+                        }
+                      >
+                        Edit
+                      </button>
                     </Link>
                   </td>
                   <td>
